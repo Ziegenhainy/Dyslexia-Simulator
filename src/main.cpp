@@ -6,23 +6,14 @@
 using namespace geode::prelude;
 
 void shuffleString(std::string& str) {
-    float dyslexiaChance = Mod::get()->getSettingValue<double>("dyslexia-percent")/100.0f;
+    float dyslexiaChance = Mod::get()->getSettingValue<double>("dyslexia-percent") / 100.0f;
     int strSize = str.size();
-    int lo = 0;
-    std::size_t hi = str.find_first_of('  ');
-    while(hi!=strSize) {
-        if (hi==std::string::npos) hi = strSize;
-        for (int i = lo; i<hi; i++) {
-            if ((float)rand()/RAND_MAX<=dyslexiaChance) {
-                int randint = rand()%(hi-lo)+lo;
-                const char tmp = str[i];
-                str[i] = str[randint];
-                str[randint] = tmp;
-            }
-        }
-        if (hi != strSize) {
-            lo = ++hi;
-            hi = str.find_first_of('  ', hi);
+    for (int i = 0; i < strSize; i++) {
+        if ((float)rand() / RAND_MAX <= dyslexiaChance) {
+            int randint = rand() % strSize;
+            const char tmp = str[i];
+            str[i] = str[randint];
+            str[randint] = tmp;
         }
     }
 }
