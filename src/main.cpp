@@ -9,7 +9,7 @@ void shuffleString(std::string& str) {
     float dyslexiaChance = Mod::get()->getSettingValue<double>("dyslexia-percent")/100.0f;
     int strSize = str.size();
     int lo = 0;
-    std::size_t hi = str.find_first_of(' ');
+    std::size_t hi = str.find_first_of('');
     while(hi!=strSize) {
         if (hi==std::string::npos) hi = strSize;
         for (int i = lo; i<hi; i++) {
@@ -22,7 +22,7 @@ void shuffleString(std::string& str) {
         }
         if (hi != strSize) {
             lo = ++hi;
-            hi = str.find_first_of(' ', hi);
+            hi = str.find_first_of('', hi);
         }
     }
 }
