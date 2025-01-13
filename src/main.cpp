@@ -13,7 +13,7 @@ void shuffleString(std::string& str) {
     while(hi!=strSize) {
         if (hi==std::string::npos) hi = strSize;
         for (int i = lo; i<hi; i++) {
-            if ((float)rand()/RAND_MAX<=dyslexiaChance) {
+            if ((float)rand()/RAND_MAX<dyslexiaChance) {
                 int randint = rand()%(hi-lo)+lo;
                 const char tmp = str[i];
                 str[i] = str[randint];
