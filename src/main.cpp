@@ -2,6 +2,7 @@
 #include "ccTypes.h"
 #include <Geode/Geode.hpp>
 #include <Geode/modify/CCLabelBMFont.hpp>
+#include <Geode/modify/MenuLayer.hpp>
 
 using namespace geode::prelude;
 
@@ -26,6 +27,27 @@ void shuffleString(std::string& str) {
         }
     }
 }
+
+class $modify(MyMenuLayer, MenuLayer) {
+    static void onModify(auto& self) {
+		if (!self.setHookPriority("MenuLayer::init", 1)) {
+			log::warn("Failed to set hook priority.");
+		}
+	}
+
+    void makeGeomertyLogo() {
+        auto geomertySprite = CCSprite::createWithSpriteFrameName("Geomertylogo.png"_spr);
+        auto oldLogo = static_cast<CCSprite*>(getChildByID("main-title"));
+        oldLogo->setTexture(geomertySprite->getTexture());
+        oldLogo->setTextureRect(geomertySprite->getTextureRect());
+    };
+
+    bool init() {
+        if (!MenuLayer::init()) return false;
+        makeGeomertyLogo();
+        return true;
+    };
+};
 
 class $modify(HookedCCLabelBMFont, CCLabelBMFont) {
     bool initWithString(char const* str, char const* fntFile, float width, cocos2d::CCTextAlignment alignment, cocos2d::CCPoint imageOffset) {
