@@ -36,7 +36,7 @@ class $modify(MyMenuLayer, MenuLayer) {
 	}
 
     void makeGeomertyLogo() {
-        auto geomertySprite = CCSprite::createWithSpriteFrameName("Geomertylogo.png"_spr);
+        auto geomertySprite = CCSprite::create("Geomertylogo.png"_spr);
         auto oldLogo = static_cast<CCSprite*>(getChildByID("main-title"));
         oldLogo->setTexture(geomertySprite->getTexture());
         oldLogo->setTextureRect(geomertySprite->getTextureRect());
